@@ -7,63 +7,56 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import me.jiko21.components.TaskLists
+import me.jiko21.entity.Task
 import me.jiko21.ui.theme.TodoComposeTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val lists = arrayListOf(
+            Task(1, "test1"),
+            Task(2, "test2"),
+            Task(3, "test3"),
+            Task(4, "test4"),
+            Task(5, "test5"),
+            Task(6, "test6"),
+            Task(7, "test7"),
+            Task(8, "test8"),
+            Task(9, "test9"),
+            Task(10, "test10"),
+            Task(11, "test11"),
+            Task(12, "test12")
+        )
         setContent {
             TodoComposeTheme {
                 // A surface container using the 'background' color from the theme
-                Surface(
-                    modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
-                ) {
-                    MessageCard(msg = Message("Jiko21", "Hello!"))
-                }
+                Scaffold(
+                    floatingActionButton = {
+                        FloatingActionButton(
+                            contentColor = Color.White,
+                            onClick = { /*TODO*/ }) {
+                            Icon(Icons.Filled.Add, contentDescription = "add task")
+                        }
+                    },
+                    content = {
+                        Surface(
+                            modifier = Modifier.fillMaxSize(),
+                            color = MaterialTheme.colors.background
+                        ) {
+                            TaskLists(lists = lists)
+                        }
+                    }
+                )
             }
         }
     }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-//
-//@Preview(showBackground = true)
-//@Composable
-//fun DefaultPreview() {
-//    TodoComposeTheme {
-//        Greeting("Android")
-//    }
-//}
-
-data class Message(val author: String, val body: String)
-
-@Composable
-fun MessageCard(msg: Message) {
-    Row {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_foreground),
-            contentDescription = "Contact Picture"
-        )
-        Column {
-            Text(text = msg.author)
-            Text(text = msg.body)
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewMessageCard() {
-    MessageCard(msg = Message("Jiko21", "Hello!"))
 }
