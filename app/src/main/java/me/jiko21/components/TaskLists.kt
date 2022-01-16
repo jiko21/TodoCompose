@@ -13,7 +13,7 @@ import me.jiko21.entity.Task
 fun TaskLists(lists: List<Task>) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp),) {
         items(lists) { task ->
-            ListItem(task = task)
+            ListItem(task = task, onDelete = {})
         }
     }
 }
