@@ -16,7 +16,7 @@ class ListItemTest {
 
         val task = Task(1, "sample text")
         composeTestRule.setContent {
-            ListItem(task = task)
+            ListItem(task = task, {})
         }
 
         composeTestRule.onNodeWithText(task.content)
