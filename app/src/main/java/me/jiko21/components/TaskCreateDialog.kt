@@ -7,7 +7,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import me.jiko21.entity.Task
 
 @Composable
-fun TaskCreateDialog(isOpened: Boolean, onDismiss: () -> Unit, onSubmit: () -> Unit, onCancel: () -> Unit) {
+fun TaskCreateDialog(isOpened: Boolean, onDismiss: () -> Unit, onSubmit: (task: Task) -> Unit, onCancel: () -> Unit) {
     var content by remember {
         mutableStateOf("")
     }
@@ -26,7 +26,10 @@ fun TaskCreateDialog(isOpened: Boolean, onDismiss: () -> Unit, onSubmit: () -> U
             },
             confirmButton = {
                 TextButton(
-                    onClick = onSubmit
+                    onClick = {
+                        onSubmit(Task(null, content))
+                        content = ""
+                    }
                 ) {
                     Text("Add")
                 }

@@ -10,10 +10,12 @@ import androidx.compose.ui.unit.dp
 import me.jiko21.entity.Task
 
 @Composable
-fun TaskLists(lists: List<Task>) {
+fun TaskLists(lists: List<Task>, onDelete: (id: Int) -> Unit) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(4.dp),) {
         items(lists) { task ->
-            ListItem(task = task, onDelete = {})
+            ListItem(task = task, onDelete = {
+                task.id?.let { it -> onDelete(it)}
+            })
         }
     }
 }
@@ -26,5 +28,5 @@ fun PreviewTaskLists() {
         Task(2, "test2"),
         Task(3, "test3")
     )
-    TaskLists(lists = lists)
+    TaskLists(lists = lists, onDelete = {})
 }
